@@ -1,0 +1,98 @@
+@(active: String = "", customJs: Array[String] = Array(), customCss: Array[String] = Array())(content: Html)
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <title>@Messages("app.name") | @Messages("app.title")</title>
+    <link href="@routes.Assets.at("images/favicon.png")" rel="icon" type="image/png"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="ThanhNB" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/3189209027-widget_css_bundle.css")">
+    <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/authorization.css")">
+    <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+    <link href='//fonts.googleapis.com/css?family=Arimo|Coming+Soon|Cuprum&subset=latin,greek-ext,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    @for(css <- customCss){<link rel="stylesheet" href="@routes.Assets.at(css)" />}
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+    <!--[if IE]>
+    <script>
+        (function() {
+            var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(',');
+            for (var i = 0; i < html5.length; i++) {
+                document.createElement(html5[i]);
+            }
+            try {
+                document.execCommand('BackgroundImageCache', false, true);
+            } catch(e) {}
+        })();
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+          $(".widget h2").wrapInner("<span></span>");
+          $(".post-thumbnail a").wrapInner("<span></span>");
+    });
+    //]]>
+    </script>
+    <script src="@routes.Assets.at("javascripts/script.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/dropscript.js")" type="text/javascript"></script>    
+
+    <!--Image Slider Script and Css Start-->
+    <script src="@routes.Assets.at("javascripts/jquery.flexslider-min.js")" type="text/javascript"></script>
+    <link href="@routes.Assets.at("stylesheets/flexslider.css")" media="all" rel="stylesheet" type="text/css">
+    <!--Image Slider Script and Css End-->
+
+    <!-- Article Summary script & css start -->
+    <script type="text/javascript">
+    //<![CDATA[
+    var summaryConf = {
+            showImage: false,
+            imgFloat: 'left',
+            imgWidth: 120,
+            imgHeight: 90,
+            defaultThumb: '//lh3.googleusercontent.com/-GRP8IcURRsw/T9MjiNWXUcI/AAAAAAAAB88/QEDpDHxI55o/s1600/no-thumb.jpg',
+            words: 30,
+            wordsNoImg: 30,
+            skip: 0,
+            showHome: true,
+            showLabel: true,
+    };
+    //]]>
+    </script>
+    <script src="@routes.Assets.at("javascripts/summary.min.js")" type="text/javascript"></script>
+    <!-- Article Summary script & css end -->
+</head>
+<body style="zoom: 1;">
+    <div id="outer-wrapper">
+        @_inc_pageheader()
+        @_inc_breakingnews()
+        
+	    <div id="main-wrapper">
+	        Main Content
+	    </div>    
+	    <script type="text/javascript">
+	    //<![CDATA[
+	    /* Auto Picasa Image Resize Script Started */
+	    function resizeThumb(e,b){
+	        var c=document.getElementById(e), d=c!=null?c.getElementsByTagName("img"):null;
+	        if(d!=null){for(var a=0;a<d.length;a++){d[a].src=d[a].src.replace(/\/s72\-c/,"/s"+b+"-c");d[a].width=b}}
+	    }
+	    resizeThumb("main",250);
+	    //]]>
+	    </script> 
+    
+        @blocks._col_sidebar_1()
+        @blocks._col_sidebar_2()
+    
+        <div class="clear"></div>
+    </div>
+    
+    @_inc_pagefooter()
+
+    @for(js <- customJs){<script type="text/javascript" src="@routes.Assets.at(js)"></script>}
+</body>
+</html>

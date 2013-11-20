@@ -1,0 +1,29 @@
+@()
+<div class="widget HTML">
+    <h2 class="title">Search Box</h2>
+    <div class="widget-content">
+        <div id="search-form-feed">
+            <form action="http://squid-cbtblogger.blogspot.com/search" onsubmit="return updateScript();">
+                <input name="q" type="text" value="Type And Hit Enter..." id="feed-q-input" onkeyup="resetField();" onfocus="this.value=&#39;&#39;;">
+            </form>
+            <div id="search-result-container"></div>
+            <div id="search-result-loader">Loading...</div>
+        </div>
+        <script type="text/javascript">
+        //<![CDATA[
+        var searchFormConfig = {
+        	    url: "http://squid-cbtblogger.blogspot.com/", // Add Your Blog URl
+            	numPost: 9999,
+                summaryPost: true,
+                summaryLength: 400,
+                resultTitle: "Search Result",
+                noResult: "No result",
+                resultThumbnail: true,
+                thumbSize: 40,
+                fallbackThumb: "http://reader-download.googlecode.com/svn/trunk/images/no-image-72x72.png"
+        };
+        //]]>
+        </script> 
+    </div>
+    <div class="clear"></div>
+</div>
