@@ -8,7 +8,7 @@ import java.util.Map;
 import bo.DbUtils;
 
 import com.github.ddth.plommon.bo.BaseMysqlDao;
-import com.github.ddth.plommon.utils.DPathUtils;
+import com.github.ddth.commons.utils.DPathUtils;
 
 import devblog.Constants;
 

@@ -5,8 +5,9 @@ version := "1.0-SNAPSHOT"
 libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.26",
   "com.google.guava" % "guava" % "14.0",
+  "com.github.ddth" % "ddth-commons" % "0.1.0-SNAPSHOT",
   "com.typesafe" %% "play-plugins-redis" % "2.1.1",
-  "com.github.ddth" %% "play-module-plommon" % "0.3.3-SNAPSHOT",
+  "com.github.ddth" %% "play-module-plommon" % "0.4.0-SNAPSHOT",
   javaJdbc,
   javaEbean,
   cache
