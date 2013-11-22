@@ -1,0 +1,86 @@
+.devblogform {
+    display: block;
+    width: 100%;	
+}
+
+.devblogform label { 
+    display: block;
+    font-size: medium;
+}
+
+.devblogform h1, .devblogform h2, .devblogform h2 {
+	display: block;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.devblogform-infomsg { 
+    font-size: small;
+    font-style: italic;
+    display: block;
+    margin-top: 4px;
+}
+ 
+.devblogform-row {
+    display: block;
+    margin-bottom: 0px;
+    padding: 4px 8px 4px 8px;
+    margin-left: -8px;
+}
+
+.devblogform-row-active {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 4px #9ecaed;
+}
+ 
+.devblogform input[type="text"], .devblogform input[type="password"] {
+	font-size: large;
+    width: 100%;
+    border: 2px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 8px;
+    color: #676767;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.devblogform input[type="text"]:focus, .devblogform input[type="password"]:focus {
+    outline: none;
+    color: #414141;
+    border-color: #9ecaed;
+    box-shadow: 0 0 4px #9ecaed;
+}
+
+.devblogform .btn {
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: large;
+    line-height: 29px;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.devblogform .btn-submit {
+	border: 1px solid #2980b9;
+    background: #3498db;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#3498db),color-stop(100%,#2980b9));
+    background: -webkit-linear-gradient(top,#3498db,#2980b9);
+    background: -moz-linear-gradient(top,#3498db,#2980b9);
+    background: -o-linear-gradient(top,#3498db,#2980b9);
+    background: linear-gradient(top,#3498db,#2980b9);
+}
+.devblogform .btn-submit:hover {
+  background: #2691d8;
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#2691d8),color-stop(100%,#2676ab));
+  background: -webkit-linear-gradient(top,#2691d8,#2676ab);
+  background: -moz-linear-gradient(top,#2691d8,#2676ab);
+  background: -o-linear-gradient(top,#2691d8,#2676ab);
+  background: linear-gradient(top,#2691d8,#2676ab);
+}

@@ -1,4 +1,8 @@
-@(active: String = "", customJs: Array[String] = Array(), customCss: Array[String] = Array())(content: Html)
+@(active: String = "", customJs: Array[String] = Array(), customCss: Array[String] = Array(),
+    sidebar1: Html = squid.front.blocks._col_sidebar_1(),
+    sidebar2: Html = squid.front.blocks._col_sidebar_2(),
+    sidebar3: Html = null
+    )(content: Html)
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -72,21 +76,12 @@
         @_inc_breakingnews()
         
 	    <div id="main-wrapper">
-	        Main Content
-	    </div>    
-	    <script type="text/javascript">
-	    //<![CDATA[
-	    /* Auto Picasa Image Resize Script Started */
-	    function resizeThumb(e,b){
-	        var c=document.getElementById(e), d=c!=null?c.getElementsByTagName("img"):null;
-	        if(d!=null){for(var a=0;a<d.length;a++){d[a].src=d[a].src.replace(/\/s72\-c/,"/s"+b+"-c");d[a].width=b}}
-	    }
-	    resizeThumb("main",250);
-	    //]]>
-	    </script> 
+	        @content
+	    </div>
     
-        @blocks._col_sidebar_1()
-        @blocks._col_sidebar_2()
+        @if(sidebar1!=null){@sidebar1}
+        @if(sidebar2!=null){@sidebar2}
+        @if(sidebar3!=null){@sidebar3}
     
         <div class="clear"></div>
     </div>

@@ -1,0 +1,4 @@
+msg.signup = Đăng Ký
+msg.user.email = Địa Chỉ Email
+msg.user.password = Mật Mã
+msg.user.confirmedPassword = Nhập Lại Mật Mã

@@ -10,8 +10,9 @@ libraryDependencies ++= Seq(
   "com.github.ddth" %% "play-module-plommon" % "0.4.0-SNAPSHOT",
   javaJdbc,
   javaEbean,
-  cache
-)     
+  cache,
+  filters
+)
 
 resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
 

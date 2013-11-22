@@ -1,0 +1,14 @@
+@()
+@_layout(customJs=Array("javascripts/progression.min.js"),customCss=Array("stylesheets/progression.min.css")){
+<iframe src="https://www.facebook.com/plugins/registration?
+             client_id=@play.Play.application().configuration().getString("fb.appid")&
+             redirect_uri=http://ddth.org/fbregisterSubmit&
+             fields=name,birthday,gender,location,email"
+        scrolling="auto"
+        frameborder="no"
+        style="border:none"
+        allowTransparency="true"
+        width="100%"
+        height="330">
+</iframe>
+}

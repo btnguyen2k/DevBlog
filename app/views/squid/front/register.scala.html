@@ -1,0 +1,62 @@
+@()
+@_layout(sidebar1=null, sidebar2=null,
+        customJs=Array("javascripts/jquery.devblogform.js"), customCss=Array("stylesheets/devblogform.css")){
+    <form id="registerform" method="post" action="#" class="devblogform">
+        <h1>@Messages("msg.signup")</h1>
+        <div class="devblogform-row">
+            <!-- <label for="frm_email">@Messages("msg.user.email")</label> -->
+            <input data-devblogform="" type="text" name="email" id="frm_email"
+                data-helper="Please enter your email address"
+                placeholder="@Messages("msg.user.email")"
+                />
+            <span class="devblogform-infomsg">&nbsp;</span>
+        </div>
+   
+        <div class="devblogform-row">
+            <!-- <label for="frm_password">@Messages("msg.user.password")</label> -->
+            <input data-devblogform="" type="password" name="password" id="frm_password"
+                data-helper="Make sure you can remember it!"
+                placeholder="@Messages("msg.user.password")"
+                />
+            <span class="devblogform-infomsg">&nbsp;</span>
+        </div>
+   
+        <div class="devblogform-row">
+		    <!-- <label for="frm_confirmedPassword">@Messages("msg.user.confirmedPassword")</label> -->
+		    <input data-devblogform="" type="password" name="confirmedPassword" id="frm_confirmedPassword"
+		      data-helper="Please re-enter the password again."
+		      placeholder="@Messages("msg.user.confirmedPassword")"
+		      />
+		    <span class="devblogform-infomsg">&nbsp;</span>
+        </div>
+        
+        <div class="clear">&nbsp;</div>
+   
+        <input type="submit" value="@Messages("msg.signup")" class="btn btn-submit">
+    </form>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$("#registerform").devblogform();
+    });
+    /*
+    $(function(){
+        $("#registerform").devblogform({
+	        tooltipWidth: '400',
+	        tooltipHeight: '20px',
+	        tooltipPosition: 'right',
+	        tooltipOffset: '0',
+	        showProgressBar: false,
+	        showHelper: true,
+	        tooltipFontSize: '12px',
+	        tooltipFontColor: 'fff',
+	        progressBarBackground: 'fff',
+	        progressBarColor: '7ea2de',
+	        tooltipBackgroundColor: 'a5bce5',
+	        tooltipPadding: '7',
+	        tooltipAnimate: true
+	    })
+    });
+    */
+    </script>
+}

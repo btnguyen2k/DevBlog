@@ -1,0 +1,13 @@
+@()
+@_layout(){
+<script type="text/javascript">
+        //<![CDATA[
+        /* Auto Picasa Image Resize Script Started */
+        function resizeThumb(e,b){
+            var c=document.getElementById(e), d=c!=null?c.getElementsByTagName("img"):null;
+            if(d!=null){for(var a=0;a<d.length;a++){d[a].src=d[a].src.replace(/\/s72\-c/,"/s"+b+"-c");d[a].width=b}}
+        }
+        resizeThumb("main",250);
+        //]]>
+        </script>
+}
