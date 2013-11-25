@@ -41,7 +41,7 @@
                 @if(devblog.Application.currentUser()!=null){
                     <li><a href="javascript:void(0);">@Messages("msg.user.profile")</a>
                         <ul>
-                            <li><a href="javascript:void(0);">@Messages("msg.user.profile")</a></li>
+                            <li><a href="javascript:void(0);">@Messages("msg.user.profile") [@devblog.Application.currentUser().getEmail()|@devblog.Application.currentUser().getDisplayName()]</a></li>
                             <li><a href="@routes.Frontend.logout()">@Messages("msg.signout")</a></li>
                         </ul>
                     </li>

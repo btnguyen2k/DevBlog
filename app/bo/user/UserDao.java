@@ -229,10 +229,12 @@ public class UserDao extends BaseMysqlDao {
         Map<String, Object> dbRow = getFromCache(CACHE_KEY, Map.class);
         if (dbRow == null) {
             final String table = DbUtils.calcTableNameLinear(email, TABLE_USER, NUM_TABLES_USER);
-            final String SQL_TEMPLATE = "SELECT user_id AS {1}, user_email AS {2}, user_password AS {3}, group_id AS {4}, timestamp_create AS {5} FROM {0} WHERE user_email=?";
+            final String SQL_TEMPLATE = "SELECT user_id AS {1}, user_email AS {2}, user_password AS {3}, group_id AS {4}, timestamp_create AS {5} "
+                    + "display_name AS {6}, user_gender AS {7}, dob_month AS {8}, dob_day AS {9}, dob_year AS {10} FROM {0} WHERE user_email=?";
             final String SQL = MessageFormat.format(SQL_TEMPLATE, table, UserBo.COL_ID,
                     UserBo.COL_EMAIL, UserBo.COL_PASSWORD, UserBo.COL_GROUP_ID,
-                    UserBo.COL_TIMESTAMP_CREATE);
+                    UserBo.COL_TIMESTAMP_CREATE, UserBo.COL_DISPLAY_NAME, UserBo.COL_GENDER,
+                    UserBo.COL_DOB_MONTH, UserBo.COL_DOB_DAY, UserBo.COL_DOB_YEAR);
             final Object[] WHERE_VALUES = new Object[] { email };
             List<Map<String, Object>> dbResult = select(SQL, WHERE_VALUES);
             dbRow = dbResult != null && dbResult.size() > 0 ? dbResult.get(0) : null;
@@ -252,8 +254,11 @@ public class UserDao extends BaseMysqlDao {
             final String table = DbUtils.calcTableNameLinear(user.getEmail(), TABLE_USER,
                     NUM_TABLES_USER);
             final String CACHE_KEY = cacheKey(user);
-            final String[] COLUMNS = new String[] { "user_password", "group_id" };
-            final Object[] VALUES = new Object[] { user.getPassword(), user.getGroupId() };
+            final String[] COLUMNS = new String[] { "user_password", "group_id", "display_name",
+                    "user_gender", "dob_month", "dob_day", "dob_year" };
+            final Object[] VALUES = new Object[] { user.getPassword(), user.getGroupId(),
+                    user.getDisplayName(), user.getGender(), user.getDobMonth(), user.getDobDay(),
+                    user.getDobYear() };
             final String[] WHERE_COLUMNS = new String[] { "user_email" };
             final Object[] WHERE_VALUES = new Object[] { user.getEmail() };
             update(table, COLUMNS, VALUES, WHERE_COLUMNS, WHERE_VALUES);
