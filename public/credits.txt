@@ -1,0 +1,6 @@
+CSS Dialog Box: 
+- http://www.jankoatwarpspeed.com/css-message-boxes-for-different-message-types/
+- http://woork.blogspot.com/2008/03/css-message-box-collection.html
+
+Dialog Icons:
+- http://itweek.deviantart.com/art/Knob-Buttons-Toolbar-icons-73463960

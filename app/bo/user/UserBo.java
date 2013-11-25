@@ -14,6 +14,15 @@ public class UserBo extends BaseBo {
     public final static String COL_PASSWORD = "user_password";
     public final static String COL_GROUP_ID = "group_id";
     public final static String COL_TIMESTAMP_CREATE = "timestamp_create";
+    public final static String COL_DISPLAY_NAME = "display_name";
+    public final static String COL_GENDER = "user_gender";
+    public final static String COL_DOB_DAY = "dob_day";
+    public final static String COL_DOB_MONTH = "dob_month";
+    public final static String COL_DOB_YEAR = "dob_year";
+
+    public final static int GENDER_NONE = 0;
+    public final static int GENDER_FEMALE = 1;
+    public final static int GENDER_MALE = 2;
 
     /**
      * Hashes a password using MD5.
@@ -78,5 +87,52 @@ public class UserBo extends BaseBo {
 
     public UserBo setTimestampCreate(Date timestamp) {
         return (UserBo) setAttribute(COL_TIMESTAMP_CREATE, timestamp);
+    }
+
+    public String getDisplayName() {
+        return getAttribute(COL_DISPLAY_NAME, String.class);
+    }
+
+    public UserBo setDisplayName(String displayName) {
+        return (UserBo) setAttribute(COL_DISPLAY_NAME, displayName);
+    }
+
+    public int getGender() {
+        Integer gender = getAttribute(COL_GENDER, Integer.class);
+        return gender != null ? gender.intValue() : GENDER_NONE;
+    }
+
+    public UserBo setGender(int gender) {
+        if (gender != GENDER_FEMALE && gender != GENDER_MALE) {
+            gender = GENDER_NONE;
+        }
+        return (UserBo) setAttribute(COL_GENDER, gender);
+    }
+
+    public int getDobDay() {
+        Integer day = getAttribute(COL_DOB_DAY, Integer.class);
+        return day != null ? day.intValue() : 0;
+    }
+
+    public UserBo setDobDay(int value) {
+        return (UserBo) setAttribute(COL_DOB_DAY, value);
+    }
+
+    public int getDobMonth() {
+        Integer month = getAttribute(COL_DOB_MONTH, Integer.class);
+        return month != null ? month.intValue() : 0;
+    }
+
+    public UserBo setDobMonth(int value) {
+        return (UserBo) setAttribute(COL_DOB_MONTH, value);
+    }
+
+    public int getDobYear() {
+        Integer year = getAttribute(COL_DOB_YEAR, Integer.class);
+        return year != null ? year.intValue() : 0;
+    }
+
+    public UserBo setDobYear(int value) {
+        return (UserBo) setAttribute(COL_DOB_YEAR, value);
     }
 }

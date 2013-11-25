@@ -18,11 +18,13 @@
         	formEls.each(function(){
         		var $this1 = $(this);
         		$this1.on('blur', function(){
-        			$(this).next('.devblogform-infomsg').html('&nbsp;');
+        			//$(this).next('.devblogform-infomsg').html('&nbsp;');
+        			$(this).next('.devblogform-infomsg').hide();
         			$(this).parent('.devblogform-row').removeClass('devblogform-row-active');
         		});
         		$this1.on('focus', function(){
-        			$(this).next('.devblogform-infomsg').html($this1.attr('data-helper'));
+        			//$(this).next('.devblogform-infomsg').html($this1.attr('data-helper'));
+        			$(this).next('.devblogform-infomsg').show();
         			$(this).parent('.devblogform-row').addClass('devblogform-row-active');
         		});
         	});    

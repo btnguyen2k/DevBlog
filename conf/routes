@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Frontend.index()
 GET     /register                   controllers.Frontend.register()
+POST    /register                   controllers.Frontend.registerSubmit()
+GET     /register_done              controllers.Frontend.registerDone()
 GET     /fbregister                 controllers.Frontend.fbregister()
 
 # Map static resources from the /public folder to the /assets URL path

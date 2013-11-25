@@ -1,0 +1,10 @@
+@(message: String=null)
+@_layout(breakingNewsEnabled=false,
+        sidebar1 = null,
+        sidebar2 = null,
+        sidebar3 = squid.front.blocks._col_sidebar_3_register(),
+        customCss=Array("dialogbox/dialogbox.min.css")){
+    <div class="dialogbox dialogbox-info">
+        <p>@message</p>
+    </div>
+}

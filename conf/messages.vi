@@ -1,4 +1,19 @@
 msg.signup = Đăng Ký
+msg.signup.done = Đăng ký tài khoản thành công! Chúng tôi đã gởi mã kích hoạt tài khoản tới địa chỉ email bạn cung cấp. Vui lòng kiểm tra email và làm theo hướng dẫn để kích hoạt tài khoản của bạn.
+
+msg.signup.sidebarTitle = Kết nối với developer quanh bạn trên DevBlog
+
+msg.user.displayName = Tên Hiển Thị
+msg.user.displayName.info = Tên hiển thị của bạn trên DevBlog
 msg.user.email = Địa Chỉ Email
+msg.user.email.info = Mã kích hoạt tài khoản sẽ gởi đến địa chỉ email của bạn
 msg.user.password = Mật Mã
+msg.user.password.info = Chọn mật mã cho tài khoản của bạn
 msg.user.confirmedPassword = Nhập Lại Mật Mã
+msg.user.confirmedPassword.info = Nhập mật mã lại lần nữa để bảo đảm chính xác
+
+error.invalid.displayName = Lỗi: Vui lòng nhập vào tên hiển thị hợp lệ!
+error.invalid.email = Lỗi: Vui lòng nhập vào email hợp lệ!
+error.exists.email = Lỗi: Email "{0}" đã được dùng để đăng ký ở tài khoản khác!
+error.invalid.password = Lỗi: Vui lòng nhập vào mật mã hợp lệ!
+error.invalid.onfirmedPassword = Lỗi: Vui lòng nhập vào mật mã hợp lệ!

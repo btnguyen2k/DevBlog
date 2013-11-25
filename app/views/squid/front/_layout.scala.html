@@ -1,4 +1,5 @@
 @(active: String = "", customJs: Array[String] = Array(), customCss: Array[String] = Array(),
+    breakingNewsEnabled: Boolean = true,
     sidebar1: Html = squid.front.blocks._col_sidebar_1(),
     sidebar2: Html = squid.front.blocks._col_sidebar_2(),
     sidebar3: Html = null
@@ -15,9 +16,11 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
     <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/3189209027-widget_css_bundle.css")">
     <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/authorization.css")">
-    <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+    <link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")" media="all">
+    <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'/>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'/>
     <link href='//fonts.googleapis.com/css?family=Arimo|Coming+Soon|Cuprum&subset=latin,greek-ext,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     @for(css <- customCss){<link rel="stylesheet" href="@routes.Assets.at(css)" />}
 
     <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
@@ -73,7 +76,7 @@
 <body style="zoom: 1;">
     <div id="outer-wrapper">
         @_inc_pageheader()
-        @_inc_breakingnews()
+        @if(breakingNewsEnabled){@_inc_breakingnews()}
         
 	    <div id="main-wrapper">
 	        @content

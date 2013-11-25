@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
+import utils.IdUtils;
 import bo.DbUtils;
 
-import com.github.ddth.plommon.bo.BaseMysqlDao;
 import com.github.ddth.commons.utils.DPathUtils;
+import com.github.ddth.plommon.bo.BaseMysqlDao;
+import com.github.ddth.plommon.bo.ParamExpression;
 
 import devblog.Constants;
 
@@ -164,12 +168,18 @@ public class UserDao extends BaseMysqlDao {
      * @return
      */
     public static UserBo create(UserBo user) {
+        if (StringUtils.isBlank(user.getId())) {
+            String id = IdUtils.nextId64Ascii();
+            user.setId(id);
+        }
         final String table = DbUtils.calcTableNameLinear(user.getEmail(), TABLE_USER,
                 NUM_TABLES_USER);
         final String[] COLUMNS = new String[] { "user_id", "user_email", "user_password",
-                "group_id", "timestamp_create" };
+                "group_id", "timestamp_create", "display_name", "user_gender", "dob_month",
+                "dob_day", "dob_year" };
         final Object[] VALUES = new Object[] { user.getId(), user.getEmail(), user.getPassword(),
-                user.getGroupId(), user.getTimestampCreate() };
+                user.getGroupId(), new ParamExpression("UTC_TIMESTAMP()"), user.getDisplayName(),
+                user.getGender(), user.getDobMonth(), user.getDobDay(), user.getDobYear() };
         insertIgnore(table, COLUMNS, VALUES);
         invalidate(user);
         return (UserBo) user.markClean();

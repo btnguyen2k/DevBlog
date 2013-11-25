@@ -1,62 +1,62 @@
-@()
-@_layout(sidebar1=null, sidebar2=null,
-        customJs=Array("javascripts/jquery.devblogform.js"), customCss=Array("stylesheets/devblogform.css")){
-    <form id="registerform" method="post" action="#" class="devblogform">
+@(form: play.data.Form[forms.FormRegister]=null)
+@_layout(breakingNewsEnabled=false,
+        sidebar1 = null,
+        sidebar2 = null,
+        sidebar3 = squid.front.blocks._col_sidebar_3_register(),
+        customJs=Array("javascripts/jquery.devblogform.js"),
+        customCss=Array("stylesheets/devblogform.css", "dialogbox/dialogbox.min.css")){
+    @_macro_displayFormErrors(form, Array("email", "password", "confirmedPassword"))
+    <form id="registerform" method="post" action="@routes.Frontend.register()" class="devblogform">
         <h1>@Messages("msg.signup")</h1>
+        
+        <div class="devblogform-row">
+            <!-- <label for="frm_displayName">@Messages("msg.user.displayName")</label> -->
+            <input data-devblogform="" type="text" name="displayName" id="frm_displayName"
+                data-helper="@Messages("msg.user.displayName.info")"
+                placeholder="@Messages("msg.user.displayName")"
+                value="@if(form!=null){@form("displayName").value}"
+                />
+            <span class="devblogform-infomsg">@Messages("msg.user.displayName.info")</span>
+        </div>
+        
         <div class="devblogform-row">
             <!-- <label for="frm_email">@Messages("msg.user.email")</label> -->
             <input data-devblogform="" type="text" name="email" id="frm_email"
-                data-helper="Please enter your email address"
+                data-helper="@Messages("msg.user.email.info")"
                 placeholder="@Messages("msg.user.email")"
+                value="@if(form!=null){@form("email").value}"
                 />
-            <span class="devblogform-infomsg">&nbsp;</span>
+            <span class="devblogform-infomsg">@Messages("msg.user.email.info")</span>
         </div>
    
         <div class="devblogform-row">
             <!-- <label for="frm_password">@Messages("msg.user.password")</label> -->
             <input data-devblogform="" type="password" name="password" id="frm_password"
-                data-helper="Make sure you can remember it!"
+                data-helper="@Messages("msg.user.password.info")"
                 placeholder="@Messages("msg.user.password")"
                 />
-            <span class="devblogform-infomsg">&nbsp;</span>
+            <span class="devblogform-infomsg">@Messages("msg.user.password.info")</span>
         </div>
    
         <div class="devblogform-row">
 		    <!-- <label for="frm_confirmedPassword">@Messages("msg.user.confirmedPassword")</label> -->
 		    <input data-devblogform="" type="password" name="confirmedPassword" id="frm_confirmedPassword"
-		      data-helper="Please re-enter the password again."
+		      data-helper="@Messages("msg.user.confirmedPassword.info")"
 		      placeholder="@Messages("msg.user.confirmedPassword")"
 		      />
-		    <span class="devblogform-infomsg">&nbsp;</span>
+		    <span class="devblogform-infomsg">@Messages("msg.user.confirmedPassword.info")</span>
         </div>
         
         <div class="clear">&nbsp;</div>
    
         <input type="submit" value="@Messages("msg.signup")" class="btn btn-submit">
+        |
+        <fb:login-button show-faces="true" onclick="javascript:alert('');" scope="email">Đăng nhập bằng Facebook</fb:login-button>
     </form>
 
     <script type="text/javascript">
     $(document).ready(function(){
     	$("#registerform").devblogform();
     });
-    /*
-    $(function(){
-        $("#registerform").devblogform({
-	        tooltipWidth: '400',
-	        tooltipHeight: '20px',
-	        tooltipPosition: 'right',
-	        tooltipOffset: '0',
-	        showProgressBar: false,
-	        showHelper: true,
-	        tooltipFontSize: '12px',
-	        tooltipFontColor: 'fff',
-	        progressBarBackground: 'fff',
-	        progressBarColor: '7ea2de',
-	        tooltipBackgroundColor: 'a5bce5',
-	        tooltipPadding: '7',
-	        tooltipAnimate: true
-	    })
-    });
-    */
     </script>
 }

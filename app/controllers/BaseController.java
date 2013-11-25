@@ -20,11 +20,17 @@ public class BaseController extends Controller {
         String clazzName = "views.html." + template + "." + view;
         Class<?> clazz = Class.forName(clazzName);
 
-        Class<?>[] typeList = new Class[params.length];
-        for (int i = 0; i < params.length; i++) {
-            typeList[i] = params[i].getClass();
+        // Class<?>[] typeList = new Class[params.length];
+        // for (int i = 0; i < params.length; i++) {
+        // typeList[i] = params[i].getClass();
+        // }
+
+        Method[] methods = clazz.getMethods();
+        for (Method method : methods) {
+            if (method.getName().equals("render")) {
+                return (Html) method.invoke(null, params);
+            }
         }
-        Method renderMethod = clazz.getMethod("render", typeList);
-        return (Html) renderMethod.invoke(null, params);
+        return null;
     }
 }
