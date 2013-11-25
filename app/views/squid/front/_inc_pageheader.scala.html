@@ -38,7 +38,23 @@
                         <li><a href="javascript:void(0);">Dropdown 1.4</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0);">Contact Us</a></li>
+                @if(devblog.Application.currentUser()!=null){
+                    <li><a href="javascript:void(0);">@Messages("msg.user.profile")</a>
+                        <ul>
+                            <li><a href="javascript:void(0);">@Messages("msg.user.profile")</a></li>
+                            <li><a href="@routes.Frontend.logout()">@Messages("msg.signout")</a></li>
+                        </ul>
+                    </li>
+                    <li></li>
+                } else {
+                    <li><a href="@routes.Frontend.login()">@Messages("msg.signin")</a>
+	                    <ul>
+	                        <li><a href="@routes.Frontend.login()">@Messages("msg.signin.devblog")</a></li>
+	                        <li><a href="javascript:fbLogin();">@Messages("msg.signin.facebook")</a></li>
+	                    </ul>
+	                </li>
+                    <li><a href="@routes.Frontend.register()">@Messages("msg.signup")</a></li>
+                }
             </ul>
         </div>
     </div>

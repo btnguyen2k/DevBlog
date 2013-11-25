@@ -20,10 +20,11 @@
     <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'/>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'/>
     <link href='//fonts.googleapis.com/css?family=Arimo|Coming+Soon|Cuprum&subset=latin,greek-ext,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="@routes.Assets.at("font-awesome/4.0.3/css/font-awesome.min.css")" rel="stylesheet">
     @for(css <- customCss){<link rel="stylesheet" href="@routes.Assets.at(css)" />}
 
     <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.cookie.js")"></script>
     <!--[if IE]>
     <script>
         (function() {
@@ -74,6 +75,7 @@
     <!-- Article Summary script & css end -->
 </head>
 <body style="zoom: 1;">
+    <div id="fb-root"></div>
     <div id="outer-wrapper">
         @_inc_pageheader()
         @if(breakingNewsEnabled){@_inc_breakingnews()}
@@ -92,5 +94,72 @@
     @_inc_pagefooter()
 
     @for(js <- customJs){<script type="text/javascript" src="@routes.Assets.at(js)"></script>}
+    <script type="text/javascript">
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+        	  appId     : '@devblog.Application.fbAppId()', // App ID from the app dashboard
+        	  channelUrl: '/assets/fbchannel.html',
+        	  status    : true,                             // Check Facebook Login status
+        	  cookie    : true,                             // enable cookies to allow the server to access the session
+        	  xfbml     : true                              // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if (response.status === 'connected') {
+                // The response object is returned with a status field that lets the app know the current
+                // login status of the person. In this case, we're handling the situation where they 
+                // have logged in to the app.
+            } else if (response.status === 'not_authorized') {
+                // In this case, the person is logged into Facebook, but not into the app
+            } else {
+                // In this case, the person is not logged into Facebook
+            }
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function(){
+        // If we've already installed the SDK, we're done
+        if (document.getElementById('facebook-jssdk')) {return;}
+
+        // Get the first script element, which we'll use to find the parent node
+        var firstScriptElement = document.getElementsByTagName('script')[0];
+
+        // Create a new script element and set its id
+        var facebookJS = document.createElement('script'); 
+        facebookJS.id = 'facebook-jssdk';
+
+        // Set the new script's source to the source of the Facebook JS SDK
+        facebookJS.src = '//connect.facebook.net/en_US/all.js';
+
+        // Insert the Facebook JS SDK into the DOM
+        firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+    }());
+    
+    function fbLoggedIn() {
+        var authResp = FB.getAuthResponse();
+        if ( authResp && authResp.accessToken ) {
+            var fbAccessToken = authResp.accessToken;
+            var fbUserId = authResp.userID;
+            var fbExpiresIn = authResp.expiresIn;
+            $.cookie('@devblog.Constants.COOKIE_FB_ACC_TOKEN', fbAccessToken, { path: '/' });
+            $.cookie('@devblog.Constants.COOKIE_FB_UID', fbUserId, { path: '/' });
+            $.cookie('@devblog.Constants.COOKIE_FB_EXPIRY', fbExpiresIn, { path: '/' });
+        }
+        window.location.href = '@routes.Frontend.loginFacebook()';
+    }
+    
+    function fbLogin() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+                fbLoggedIn();
+            } else {
+                window.location.href = '@routes.Frontend.login()';
+            }
+        }, {scope: '@devblog.Application.fbAppScope()'});
+    }
+    </script>
 </body>
 </html>

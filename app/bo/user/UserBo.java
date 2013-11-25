@@ -1,5 +1,9 @@
 package bo.user;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -23,6 +27,25 @@ public class UserBo extends BaseBo {
     public final static int GENDER_NONE = 0;
     public final static int GENDER_FEMALE = 1;
     public final static int GENDER_MALE = 2;
+
+    public static int parseGender(String gender) {
+        if ("female".equalsIgnoreCase(gender)) {
+            return GENDER_FEMALE;
+        } else if ("male".equalsIgnoreCase(gender)) {
+            return GENDER_MALE;
+        } else {
+            return GENDER_NONE;
+        }
+    }
+
+    public static Date parseDob(String dob, String pattern) {
+        DateFormat df = new SimpleDateFormat(pattern);
+        try {
+            return df.parse(dob);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
     /**
      * Hashes a password using MD5.
@@ -112,6 +135,15 @@ public class UserBo extends BaseBo {
     public int getDobDay() {
         Integer day = getAttribute(COL_DOB_DAY, Integer.class);
         return day != null ? day.intValue() : 0;
+    }
+
+    public UserBo setDob(Date dob) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(dob);
+        setDobDay(c.get(Calendar.DAY_OF_MONTH));
+        setDobMonth(c.get(Calendar.MONTH) + 1); // month starts from 0
+        setDobYear(c.get(Calendar.YEAR));
+        return this;
     }
 
     public UserBo setDobDay(int value) {

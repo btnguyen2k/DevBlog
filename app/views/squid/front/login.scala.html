@@ -1,0 +1,41 @@
+@(form: play.data.Form[forms.FormRegister]=null, captcha: Boolean=false)
+@_layout(breakingNewsEnabled=false,
+        sidebar1 = null,
+        sidebar2 = null,
+        sidebar3 = squid.front.blocks._col_sidebar_3_login(),
+        customJs=Array("javascripts/jquery.devblogform.js"),
+        customCss=Array("stylesheets/devblogform.css", "dialogbox/dialogbox.min.css")){
+    @_macro_displayFormErrors(form, Array("email", "password", "confirmedPassword"))
+    <form id="formSignin" method="post" action="@routes.Frontend.login()" class="devblogform">
+        <h1>@Messages("msg.signin")</h1>
+        
+        <div class="devblogform-row">
+            <input data-devblogform="" type="text" name="email" id="frm_email"
+                data-helper="@Messages("msg.signin.email.info")"
+                placeholder="@Messages("msg.user.email")"
+                value="@if(form!=null){@form("email").value}"
+                />
+            <span class="devblogform-infomsg">@Messages("msg.signin.email.info")</span>
+        </div>
+   
+        <div class="devblogform-row">
+            <input data-devblogform="" type="password" name="password" id="frm_password"
+                data-helper="@Messages("msg.signin.password.info")"
+                placeholder="@Messages("msg.user.password")"
+                />
+            <span class="devblogform-infomsg">@Messages("msg.signin.password.info")</span>
+        </div>
+   
+        <div class="clear">&nbsp;</div>
+   
+        <input type="submit" value="@Messages("msg.signin")" class="btn btn-submit">
+        <input type="button" value="@Messages("msg.signup")" class="btn btn-default">
+        <fb:login-button show-faces="false" onlogin="javascript:fbLoggedIn();" scope="@devblog.Application.fbAppScope()">@Messages("msg.signin.facebook")</fb:login-button>
+    </form>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$("#formSignin").devblogform();
+    });
+    </script>
+}

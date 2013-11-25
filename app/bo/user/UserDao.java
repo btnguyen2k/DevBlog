@@ -2,10 +2,12 @@ package bo.user;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.social.facebook.api.FacebookProfile;
 
 import utils.IdUtils;
 import bo.DbUtils;
@@ -183,6 +185,22 @@ public class UserDao extends BaseMysqlDao {
         insertIgnore(table, COLUMNS, VALUES);
         invalidate(user);
         return (UserBo) user.markClean();
+    }
+
+    /**
+     * Creates a new user account from s Facebok profile.
+     * 
+     * @param fbProfile
+     * @return
+     */
+    public static UserBo create(FacebookProfile fbProfile) {
+        String email = fbProfile.getEmail().trim().toLowerCase();
+        String displayName = fbProfile.getName().trim();
+        int gender = UserBo.parseGender(fbProfile.getGender());
+        Date dob = UserBo.parseDob(fbProfile.getBirthday(), "MM/dd/yyyy");
+        UserBo user = new UserBo().setEmail(email).setGroupId(Constants.USER_GROUP_MEMBER)
+                .setDisplayName(displayName).setDob(dob).setGender(gender).setPassword("");
+        return create(user);
     }
 
     /**

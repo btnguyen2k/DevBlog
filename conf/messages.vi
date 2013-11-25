@@ -1,16 +1,29 @@
+msg.or = hoặc
+
 msg.signup = Đăng Ký
 msg.signup.done = Đăng ký tài khoản thành công! Chúng tôi đã gởi mã kích hoạt tài khoản tới địa chỉ email bạn cung cấp. Vui lòng kiểm tra email và làm theo hướng dẫn để kích hoạt tài khoản của bạn.
 
 msg.signup.sidebarTitle = Kết nối với developer quanh bạn trên DevBlog
 
+msg.signout = Đăng Xuất
+
+msg.signin = Đăng Nhập
+msg.signin.devblog = Dùng tài khoản DevBlog
+msg.signin.facebook = Đăng nhập bằng Facebook
+msg.signinOrSignup = Đăng Nhập hoặc Đăng Ký
+error.signin.failed = Lỗi: Email/Mật mã không khớp!
+msg.signin.email.info = Đăng nhập sử dụng địa chỉ email bạn đã đăng ký.
+msg.signin.password.info = Nhập mật mã tài khoản của bạn để đăng nhập.
+
+msg.user.profile = Cá Nhân
 msg.user.displayName = Tên Hiển Thị
 msg.user.displayName.info = Tên hiển thị của bạn trên DevBlog
 msg.user.email = Địa Chỉ Email
-msg.user.email.info = Mã kích hoạt tài khoản sẽ gởi đến địa chỉ email của bạn
+msg.user.email.info = Mã kích hoạt tài khoản sẽ gởi đến địa chỉ email của bạn.
 msg.user.password = Mật Mã
-msg.user.password.info = Chọn mật mã cho tài khoản của bạn
+msg.user.password.info = Chọn mật mã cho tài khoản của bạn.
 msg.user.confirmedPassword = Nhập Lại Mật Mã
-msg.user.confirmedPassword.info = Nhập mật mã lại lần nữa để bảo đảm chính xác
+msg.user.confirmedPassword.info = Nhập mật mã lại lần nữa để bảo đảm chính xác.
 
 error.invalid.displayName = Lỗi: Vui lòng nhập vào tên hiển thị hợp lệ!
 error.invalid.email = Lỗi: Vui lòng nhập vào email hợp lệ!

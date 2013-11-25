@@ -9,5 +9,10 @@ POST    /register                   controllers.Frontend.registerSubmit()
 GET     /register_done              controllers.Frontend.registerDone()
 GET     /fbregister                 controllers.Frontend.fbregister()
 
+GET     /logout                     controllers.Frontend.logout()
+GET     /login                      controllers.Frontend.login()
+GET     /login_facebook             controllers.Frontend.loginFacebook()
+POST    /login                      controllers.Frontend.loginSubmit()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
