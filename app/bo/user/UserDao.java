@@ -229,7 +229,7 @@ public class UserDao extends BaseMysqlDao {
         Map<String, Object> dbRow = getFromCache(CACHE_KEY, Map.class);
         if (dbRow == null) {
             final String table = DbUtils.calcTableNameLinear(email, TABLE_USER, NUM_TABLES_USER);
-            final String SQL_TEMPLATE = "SELECT user_id AS {1}, user_email AS {2}, user_password AS {3}, group_id AS {4}, timestamp_create AS {5} "
+            final String SQL_TEMPLATE = "SELECT user_id AS {1}, user_email AS {2}, user_password AS {3}, group_id AS {4}, timestamp_create AS {5}, "
                     + "display_name AS {6}, user_gender AS {7}, dob_month AS {8}, dob_day AS {9}, dob_year AS {10} FROM {0} WHERE user_email=?";
             final String SQL = MessageFormat.format(SQL_TEMPLATE, table, UserBo.COL_ID,
                     UserBo.COL_EMAIL, UserBo.COL_PASSWORD, UserBo.COL_GROUP_ID,
