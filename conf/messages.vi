@@ -1,4 +1,16 @@
+msg.dashboard = Dashboard
+msg.home = Trang Chủ
 msg.or = hoặc
+msg.nodata = Không có dữ liệu
+
+msg.search = Tìm kiếm
+msg.prev = Trước
+msg.next = Kế tiếp
+
+msg.recordsPerPage = dòng/trang
+
+msg.datatables.sInfo = Hiển thị từ _START_ đến _END_ của _TOTAL_ dòng
+msg.datatables.sInfoFiltered = (lọc từ tổng cộng _MAX_ dòng)
 
 msg.signup = Đăng Ký
 msg.signup.done = Đăng ký tài khoản thành công! Chúng tôi đã gởi mã kích hoạt tài khoản tới địa chỉ email bạn cung cấp. Vui lòng kiểm tra email và làm theo hướng dẫn để kích hoạt tài khoản của bạn.
@@ -25,8 +37,17 @@ msg.user.password.info = Chọn mật mã cho tài khoản của bạn.
 msg.user.confirmedPassword = Nhập Lại Mật Mã
 msg.user.confirmedPassword.info = Nhập mật mã lại lần nữa để bảo đảm chính xác.
 
+msg.profile.myBlogs = Blog Của Tôi
+msg.profile.writeBlog = Viết Blog
+
 error.invalid.displayName = Lỗi: Vui lòng nhập vào tên hiển thị hợp lệ!
 error.invalid.email = Lỗi: Vui lòng nhập vào email hợp lệ!
 error.exists.email = Lỗi: Email "{0}" đã được dùng để đăng ký ở tài khoản khác!
 error.invalid.password = Lỗi: Vui lòng nhập vào mật mã hợp lệ!
 error.invalid.onfirmedPassword = Lỗi: Vui lòng nhập vào mật mã hợp lệ!
+
+msg.cp.members = Thành Viên
+msg.cp.userGroups = Danh Sách Nhóm
+msg.cp.users = Danh Sách User
+
+msg.cp.userGroups.create = Tạo Nhóm Mới

@@ -22,6 +22,7 @@ public class UserDao extends BaseMysqlDao {
 
     public final static String TABLE_USERGROUP = "devblog_usergroup";
     public final static String TABLE_USER = "devblog_user_{0}";
+    public final static String TABLE_LOOKUP_USERID_EMAIL = "devblog_lookup_userid_email_{0}";
 
     // private final static UserBo[] EMPTY_ARR_USER_BO = new UserBo[0];
     private final static UsergroupBo[] EMPTY_ARR_USERGROUP_BO = new UsergroupBo[0];
@@ -174,7 +175,7 @@ public class UserDao extends BaseMysqlDao {
             String id = IdUtils.nextId64Ascii();
             user.setId(id);
         }
-        final String table = DbUtils.calcTableNameLinear(user.getEmail(), TABLE_USER,
+        final String table = DbUtils.calcTableNameLinearHex(user.getEmail(), TABLE_USER,
                 NUM_TABLES_USER);
         final String[] COLUMNS = new String[] { "user_id", "user_email", "user_password",
                 "group_id", "timestamp_create", "display_name", "user_gender", "dob_month",
@@ -209,7 +210,7 @@ public class UserDao extends BaseMysqlDao {
      * @param user
      */
     public static void delete(UserBo user) {
-        final String table = DbUtils.calcTableNameLinear(user.getEmail(), TABLE_USER,
+        final String table = DbUtils.calcTableNameLinearHex(user.getEmail(), TABLE_USER,
                 NUM_TABLES_USER);
         final String[] COLUMNS = new String[] { "user_email" };
         final Object[] VALUES = new Object[] { user.getEmail() };
@@ -228,7 +229,7 @@ public class UserDao extends BaseMysqlDao {
         final String CACHE_KEY = cacheKeyUser(email);
         Map<String, Object> dbRow = getFromCache(CACHE_KEY, Map.class);
         if (dbRow == null) {
-            final String table = DbUtils.calcTableNameLinear(email, TABLE_USER, NUM_TABLES_USER);
+            final String table = DbUtils.calcTableNameLinearHex(email, TABLE_USER, NUM_TABLES_USER);
             final String SQL_TEMPLATE = "SELECT user_id AS {1}, user_email AS {2}, user_password AS {3}, group_id AS {4}, timestamp_create AS {5}, "
                     + "display_name AS {6}, user_gender AS {7}, dob_month AS {8}, dob_day AS {9}, dob_year AS {10} FROM {0} WHERE user_email=?";
             final String SQL = MessageFormat.format(SQL_TEMPLATE, table, UserBo.COL_ID,
@@ -251,7 +252,7 @@ public class UserDao extends BaseMysqlDao {
      */
     public static UserBo update(UserBo user) {
         if (user.isDirty()) {
-            final String table = DbUtils.calcTableNameLinear(user.getEmail(), TABLE_USER,
+            final String table = DbUtils.calcTableNameLinearHex(user.getEmail(), TABLE_USER,
                     NUM_TABLES_USER);
             final String CACHE_KEY = cacheKey(user);
             final String[] COLUMNS = new String[] { "user_password", "group_id", "display_name",

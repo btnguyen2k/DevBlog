@@ -13,6 +13,14 @@ public class BaseController extends Controller {
         return Play.application().configuration().getString("template.front");
     }
 
+    protected static String getProfileTemplateName() {
+        return Play.application().configuration().getString("template.profile");
+    }
+
+    protected static String getCpTemplateName() {
+        return Play.application().configuration().getString("template.cp");
+    }
+
     protected static Html render(String template, String view, Object... params)
             throws InstantiationException, IllegalAccessException, ClassNotFoundException,
             SecurityException, NoSuchMethodException, IllegalArgumentException,

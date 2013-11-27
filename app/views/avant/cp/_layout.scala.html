@@ -1,0 +1,90 @@
+@(active: String=null, customJs: Array[String]=Array(), customCss: Array[String]=Array())(content: Html)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Avant</title>    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Avant" />
+    <meta name="author" content="The Red Team" />
+
+    <link href="@routes.Assets.at("avant/assets/css/styles.min.css")" rel="stylesheet" type="text/css" media="all" />
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css'>
+    <!--
+    <link href="@routes.Assets.at("avant/assets/demo/variations/default.css")" rel="stylesheet" type="text/css" media="all" id="styleswitcher" /> 
+    <link href="@routes.Assets.at("avant/assets/demo/variations/default.css")" rel="stylesheet" type="text/css" media="all" id="headerswitcher" /> 
+    -->
+    <link href="@routes.Assets.at("avant/assets/demo/variations/header-red.css")" rel="stylesheet" type="text/css" media="all" /> 
+    <link href="@routes.Assets.at("avant/assets/demo/variations/default.css")" rel="stylesheet" type="text/css" media="all" />
+    <!-- Note: Avant already included font-awesome, using "icon-*" classes! (not "fa fa-*" classes) -->
+    <!-- Note2: Override Avant with font-awesome-4.0.3, fallback to use "fa fa-*" classes -->
+    <!-- <link href="@routes.Assets.at("font-awesome-4.0.3/css/font-awesome.min.css")" rel="stylesheet"> -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/html5shiv.min-3.7.0.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/respond.min-1.1.0.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("avant/assets/plugins/charts-flot/excanvas.min.js")"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("avant/assets/css/ie8.css")">
+    <![endif]-->
+
+    <!-- The following CSS are included as plugins and can be removed if unused-->
+    <!--
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("avant/assets/plugins/form-daterangepicker/daterangepicker-bs3.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("avant/assets/plugins/fullcalendar/fullcalendar.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("avant/assets/plugins/form-markdown/css/bootstrap-markdown.min.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("avant/assets/plugins/codeprettifier/prettify.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("avant/assets/plugins/form-toggle/toggles.css")" /> 
+    -->
+    @for(css <- customCss){<link rel="stylesheet" href="@routes.Assets.at(css)" />}
+    
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/jquery-1.10.2.min.js")'></script>
+</head>
+
+<body class="">
+    @_inc_navbar()
+
+    <div id="page-container">
+        @_inc_sidebar_left(active)
+        @_inc_sidebar_right()
+        
+        <style type="text/css">
+        .breadcrumb>li{font-size: inherit !important;}
+        </style>
+        <div id="page-content">
+            <div id='wrap'>
+                @content
+            </div>
+        </div>
+
+        <footer role="contentinfo">
+            <div class="clearfix">
+                <ul class="list-unstyled list-inline">
+                    <li>AVANT &copy; 2013</li>
+                    <!--li class="pull-right"><a href="javascript:;" id="back-to-top">Top <i class="icon-arrow-up"></i></a></li-->
+                    <button class="pull-right btn btn-inverse btn-xs" id="back-to-top" style="margin-top: -1px; text-transform: uppercase;"><i class="fa fa-arrow-up"></i></button>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/jqueryui-1.10.3.min.js")'></script> 
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/bootstrap.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/jquery.cookie.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/jquery.touchSwipe.min.js")'></script> 
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/jquery.nicescroll.min.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/enquire.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/placeholdr.js")'></script>
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/js/application.js")'></script> 
+    <!-- The following JS are included as plugins and can be removed if unused-->
+    <!--
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/plugins/codeprettifier/prettify.js")'></script> 
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/plugins/easypiechart/jquery.easypiechart.min.js")'></script> 
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/plugins/sparklines/jquery.sparklines.min.js")'></script> 
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/plugins/form-toggle/toggle.min.js")'></script>    
+    <script type='text/javascript' src='@routes.Assets.at("avant/assets/demo/demo.js")'></script>
+    -->
+    @for(js <- customJs){<script type="text/javascript" src="@routes.Assets.at(js)"></script>}
+</body>
+</html>

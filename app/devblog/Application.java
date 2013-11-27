@@ -1,6 +1,7 @@
 package devblog;
 
 import play.Play;
+import play.mvc.Controller;
 import bo.user.UserBo;
 import bo.user.UserDao;
 
@@ -24,8 +25,12 @@ public class Application {
     public static String fbAppId() {
         return Play.application().configuration().getString("fb.app_id");
     }
-    
+
     public static String fbAppScope() {
         return Play.application().configuration().getString("fb.app_scope");
+    }
+
+    public static String queryString(String name) {
+        return Controller.request().getQueryString(name);
     }
 }

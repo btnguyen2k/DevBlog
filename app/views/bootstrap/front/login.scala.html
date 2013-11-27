@@ -1,0 +1,40 @@
+@(message: String=null, form: play.data.Form[forms.FormRegister]=null, captcha: Boolean=false)
+@_layout(breakingNewsEnabled=false,
+        sidebar1 = null,
+        sidebar2 = null,
+        sidebar3 = bootstrap.front.blocks._col_sidebar_3_login(),
+        customJs=Array("javascripts/jquery.devblogform.js"),
+        customCss=Array("stylesheets/devblogform.css")){
+    @_macro_displayFormErrors(form, Array("email", "password"))
+    <form id="formSignin" method="post" action="@routes.Frontend.login(devblog.Application.queryString("url"))" role="form">
+        <h1 style="padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #dcdcdc;">@Messages("msg.signin")</h1>
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="text" name="email" id="frm_email" class="form-control"
+                data-helper="@Messages("msg.signin.email.info")"
+                placeholder="@Messages("msg.user.email")"
+                value="@if(form!=null){@form("email").value}"
+                />
+            <span class="devblogform-infomsg help-block">@Messages("msg.signin.email.info")</span>
+        </div>
+   
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="password" name="password" id="frm_password" class="form-control"
+                data-helper="@Messages("msg.signin.password.info")"
+                placeholder="@Messages("msg.user.password")"
+                />
+            <span class="devblogform-infomsg help-block">@Messages("msg.signin.password.info")</span>
+        </div>
+   
+        <div class="clear">&nbsp;</div>
+   
+        <input type="submit" value="@Messages("msg.signin")" class="btn btn-primary">
+        <input type="button" value="@Messages("msg.signup")" class="btn btn-info">
+        <fb:login-button show-faces="false" onlogin="javascript:fbLoggedIn('@devblog.Application.queryString("url")');" scope="@devblog.Application.fbAppScope()">@Messages("msg.signin.facebook")</fb:login-button>
+    </form>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#formSignin").devblogform();
+    });
+    </script>
+}

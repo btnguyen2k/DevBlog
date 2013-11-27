@@ -1,0 +1,101 @@
+@(userGroups: Array[bo.user.UsergroupBo])
+@_layout(active="user_groups",
+        customJs=Array("avant/assets/plugins/datatables/jquery.dataTables.js",
+            "avant/assets/plugins/datatables/dataTables.bootstrap.js"),
+        customCss=Array("avant/assets/plugins/datatables/dataTables.css")){
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="@routes.Cp.index()">@Messages("msg.dashboard")</a></li>
+            <li>@Messages("msg.cp.userGroups")</li>
+        </ol>
+        
+        <div class="options">
+            <a href="javascript:;" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.userGroups.create")</a>
+        </div>
+        
+        <!--
+        <h1>@Messages("msg.cp.userGroups")</h1>
+        -->
+        <!--
+        <div class="options">
+            <div class="btn-toolbar">
+                <div class="btn-group hidden-xs">
+                    <a href='#' class="btn btn-muted dropdown-toggle" data-toggle='dropdown'><i class="fa fa-cloud-download"></i><span class="hidden-sm"> Export as  </span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Text File (*.txt)</a></li>
+                        <li><a href="#">Excel File (*.xlsx)</a></li>
+                        <li><a href="#">PDF File (*.pdf)</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-muted"><i class="fa fa-cog"></i></a>
+            </div>
+        </div>
+        -->
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>@Messages("msg.cp.userGroups")</h4>
+                        <div class="options">                            
+                            <!--
+                            <a href="javascript:;"><i class="icon-cog"></i></a>
+                            <a href="javascript:;"><i class="icon-wrench"></i></a>
+                            -->
+                            <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            <a href="javascript:;"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>                    
+                    <div class="panel-body collapse in">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="usergroups">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Action(s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(userGroup <- userGroups){
+                                    <tr class="odd gradeX">
+	                                    <td>@userGroup.getId()</td>
+	                                    <td>@userGroup.getTitle()</td>
+	                                    <td class="center">X</td>
+	                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('.datatables').dataTable({
+                                "sDom": "<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                                "sPaginationType": "bootstrap",
+                                "oLanguage": {
+                                    "sLengthMenu"  : "_MENU_ @Messages("msg.recordsPerPage")",
+                                    "sSearch"      : "",
+                                    "sEmptyTable"  : "@Messages("msg.nodata")",
+                                    "sZeroRecords" : "@Messages("msg.nodata")",
+                                    "sInfo"        : "@Messages("msg.datatables.sInfo")",
+                                    "sInfoEmpty"   : "@Messages("msg.nodata")",
+                                    "sInfoFiltered": "@Messages("msg.datatables.sInfoFiltered")",
+                                    "oPaginate"    : {
+                                        "sPrevious": "@Messages("msg.prev")",
+                                        "sNext"    : "@Messages("msg.next")",
+                                        "sFirst"   : "@Messages("msg.first")",
+                                        "sLast"    : "@Messages("msg.last")"
+                                    }
+                                }
+                            });
+                            $('.dataTables_filter input').addClass('form-control').attr('placeholder','@Messages("msg.search")');
+                            $('.dataTables_length select').addClass('form-control');
+                        });
+                        </script>
+                        <a href="javascript:;" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.userGroups.create")</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

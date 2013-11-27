@@ -123,11 +123,12 @@ public class Frontend extends BaseController {
     /*
      * Handles GET:/login
      */
-    public static Promise<Result> login() {
+    public static Promise<Result> login(String returnUrl) {
         Promise<Result> promise = Promise.promise(new Function0<Result>() {
             public Result apply() throws Exception {
                 String templateName = getFrontTemplateName();
-                Html html = render(templateName, "front.login", null, null);
+                Html html = render(templateName, "front.login", /* message */null, /* form */null, /* captcha */
+                        Boolean.FALSE);
                 return ok(html);
             }
         });
@@ -137,19 +138,24 @@ public class Frontend extends BaseController {
     /*
      * Handles POST:/login
      */
-    public static Promise<Result> loginSubmit() {
+    public static Promise<Result> loginSubmit(final String returnUrl) {
         Promise<Result> promise = Promise.promise(new Function0<Result>() {
             public Result apply() throws Exception {
                 String templateName = getFrontTemplateName();
 
                 Form<FormLogin> form = Form.form(FormLogin.class).bindFromRequest();
                 if (form.hasErrors()) {
-                    Html html = render(templateName, "front.login", form, Boolean.FALSE);
+                    Html html = render(templateName, "front.login", /* message */null, form,
+                    /* captcha */Boolean.FALSE);
                     return ok(html);
                 }
                 FormLogin formLogin = form.get();
                 Application.login(formLogin.email);
-                return redirect(routes.Frontend.index().url());
+                if (returnUrl != null && returnUrl.startsWith("/")) {
+                    return redirect(returnUrl);
+                } else {
+                    return redirect(routes.Frontend.index().url());
+                }
             }
         });
         return promise;
@@ -158,7 +164,7 @@ public class Frontend extends BaseController {
     /*
      * Handles GET:/login_facebook
      */
-    public static Promise<Result> loginFacebook() {
+    public static Promise<Result> loginFacebook(final String returnUrl) {
         Promise<Result> promise = Promise.promise(new Function0<Result>() {
             public Result apply() throws Exception {
                 Http.Cookie cookie = request().cookie(Constants.COOKIE_FB_ACC_TOKEN);
@@ -181,7 +187,7 @@ public class Frontend extends BaseController {
                         }
                     }
                 }
-                return redirect(routes.Frontend.login().url());
+                return redirect(routes.Frontend.login(returnUrl).url());
             }
         });
         return promise;

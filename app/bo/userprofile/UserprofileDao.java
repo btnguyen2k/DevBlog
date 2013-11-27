@@ -46,7 +46,7 @@ public class UserprofileDao extends BaseMysqlDao {
      * @return
      */
     public static UserprofileBo create(UserprofileBo userprofile) {
-        final String table = DbUtils.calcTableNameLinear(userprofile.getUserId(),
+        final String table = DbUtils.calcTableNameLinearHex(userprofile.getUserId(),
                 TABLE_USERPROFILE, NUM_TABLES_USERPROFILE);
         final String[] COLUMNS = new String[] { "user_id", "profile_key", "profile_type",
                 "profile_data_int", "profile_data_real", "profile_data_money",
@@ -67,7 +67,7 @@ public class UserprofileDao extends BaseMysqlDao {
      * @param userprofile
      */
     public static void delete(UserprofileBo userprofile) {
-        final String table = DbUtils.calcTableNameLinear(userprofile.getUserId(),
+        final String table = DbUtils.calcTableNameLinearHex(userprofile.getUserId(),
                 TABLE_USERPROFILE, NUM_TABLES_USERPROFILE);
         final String[] COLUMNS = new String[] { "user_id", "profile_key" };
         final Object[] VALUES = new Object[] { userprofile.getUserId(), userprofile.getProfileKey() };
@@ -87,7 +87,7 @@ public class UserprofileDao extends BaseMysqlDao {
         final String CACHE_KEY = cacheKeyUserprofile(userId, profileKey);
         Map<String, Object> dbRow = getFromCache(CACHE_KEY, Map.class);
         if (dbRow == null) {
-            final String table = DbUtils.calcTableNameLinear(userId, TABLE_USERPROFILE,
+            final String table = DbUtils.calcTableNameLinearHex(userId, TABLE_USERPROFILE,
                     NUM_TABLES_USERPROFILE);
             final String SQL_TEMPLATE = "SELECT user_id AS {1}, profile_key AS {2}, profile_type AS {3}, "
                     + "profile_data_int AS {4}, profile_data_real AS {5}, profile_data_money AS {6}, profile_data_datetime AS {7}, profile_data_string AS {8} "
@@ -114,7 +114,7 @@ public class UserprofileDao extends BaseMysqlDao {
      */
     public static UserprofileBo update(UserprofileBo userprofile) {
         if (userprofile.isDirty()) {
-            final String table = DbUtils.calcTableNameLinear(userprofile.getUserId(),
+            final String table = DbUtils.calcTableNameLinearHex(userprofile.getUserId(),
                     TABLE_USERPROFILE, NUM_TABLES_USERPROFILE);
             final String CACHE_KEY = cacheKey(userprofile);
             final String[] COLUMNS = new String[] { "profile_type", "profile_data_int",

@@ -1,0 +1,167 @@
+@(active: String = "", customJs: Array[String] = Array(), customCss: Array[String] = Array(),
+    breakingNewsEnabled: Boolean = true,
+    sidebar: Html = bootstrap.profile.blocks._col_sidebar()
+    )(content: Html)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@Messages("msg.user.profile") | @Messages("app.name")</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="@routes.Assets.at("images/favicon.ico")" rel="shortcut icon">
+    <link href="@routes.Assets.at("bootstrap-3.0.2/css/bootstrap-flatly.min.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("font-awesome-4.0.3/css/font-awesome.min.css")" rel="stylesheet">
+    @for(css <- customCss){<link rel="stylesheet" href="@routes.Assets.at(css)" />}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+        <script src="@routes.Assets.at("javascripts/html5shiv.js")"></script>
+    <![endif]-->
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.cookie.js")"></script>
+    <style type="text/css">
+    body { padding-top: 70px; }
+    .icon-padding {width: 16px;}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <!-- <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-ex1-collapse"> -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@routes.Frontend.index()">DevBlog</a>
+        </div>
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="@routes.Frontend.index()" title="@Messages("msg.home")"><i class="fa fa-home"></i> @Messages("msg.home")</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-folder-close"></i> @Messages("msg.app_management") <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="routes.AdminCp_App.appList()">@Messages("msg.apps")</a></li>
+                        <li><a href="routes.AdminCp_Category.appCategoryList()">@Messages("msg.app_categories")</a></li>
+                        <li><a href="routes.AdminCp_Platform.platformList()">@Messages("msg.platforms")</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> @Messages("msg.user_management") <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="routes.AdminCp_User.userList()">@Messages("msg.users")</a></li>
+                        <li><a href="#">@Messages("msg.user_groups")</a></li>
+                    </ul>
+                </li>            
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if(devblog.Application.currentUser()==null){
+                    <li><a href="@routes.Frontend.login()" title="@Messages("msg.signin")"><i class="fa fa-sign-in" style="font-size: large"></i></a></li>
+	                <li class="dropdown">
+	                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="@Messages("msg.signin")">@Messages("msg.signin")<b class="caret"></b></a>
+	                    <ul class="dropdown-menu">
+	                        <li><a href="@routes.Frontend.login()"><i class="fa fa-user icon-padding"></i> @Messages("msg.signin.devblog")</a></li>
+	                        <li><a href="javascript:fbLogin();"><i class="fa fa-facebook icon-padding"></i> @Messages("msg.signin.facebook")</a></li>
+	                        <li class="divider"></li>
+	                        <li><a href="@routes.Frontend.register()"><i class="fa fa-certificate icon-padding"></i> @Messages("msg.signup")</a></li>
+	                    </ul>
+	                </li>
+                } else {
+	                <li class="dropdown">
+	                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" title="@Messages("msg.user.profile")"><i class="fa fa-user"></i> <b class="caret"></b></a>
+	                    <ul class="dropdown-menu">
+	                        <li><a href="#"><i class="fa fa-dashboard icon-padding"></i> @Messages("msg.user.profile")</a></li>
+	                        <li class="divider"></li>
+	                        <li><a href="@routes.Frontend.logout()"><i class="fa fa-sign-out icon-padding"></i> @Messages("msg.signout")</a></li>
+	                    </ul>
+	                </li>
+	                <li><a href="@routes.Frontend.logout()" title="@Messages("msg.signout")"><i class="fa fa-sign-out"></i></a></li>
+	            }
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                @content
+            </div>
+            @if(sidebar!=null){@sidebar}
+        </div>
+    </div>
+
+    <script src="@routes.Assets.at("bootstrap-3.0.2/js/bootstrap.min.js")"></script>
+    @for(js <- customJs){<script type="text/javascript" src="@routes.Assets.at(js)"></script>}
+    
+    <script type="text/javascript">
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+              appId     : '@devblog.Application.fbAppId()'      , // App ID from the app dashboard
+              channelUrl: '@routes.Assets.at("/fbchannel.html")',
+              status    : true,                                   // Check Facebook Login status
+              cookie    : true,                                   // enable cookies to allow the server to access the session
+              xfbml     : true                                    // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if (response.status === 'connected') {
+                // The response object is returned with a status field that lets the app know the current
+                // login status of the person. In this case, we're handling the situation where they 
+                // have logged in to the app.
+            } else if (response.status === 'not_authorized') {
+                // In this case, the person is logged into Facebook, but not into the app
+            } else {
+                // In this case, the person is not logged into Facebook
+            }
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function(){
+        // If we've already installed the SDK, we're done
+        if (document.getElementById('facebook-jssdk')) {return;}
+
+        // Get the first script element, which we'll use to find the parent node
+        var firstScriptElement = document.getElementsByTagName('script')[0];
+
+        // Create a new script element and set its id
+        var facebookJS = document.createElement('script'); 
+        facebookJS.id = 'facebook-jssdk';
+
+        // Set the new script's source to the source of the Facebook JS SDK
+        facebookJS.src = '//connect.facebook.net/en_US/all.js';
+
+        // Insert the Facebook JS SDK into the DOM
+        firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+    }());
+    
+    function fbLoggedIn() {
+        var authResp = FB.getAuthResponse();
+        if ( authResp && authResp.accessToken ) {
+            var fbAccessToken = authResp.accessToken;
+            var fbUserId = authResp.userID;
+            var fbExpiresIn = authResp.expiresIn;
+            $.cookie('@devblog.Constants.COOKIE_FB_ACC_TOKEN', fbAccessToken, { path: '/' });
+            $.cookie('@devblog.Constants.COOKIE_FB_UID', fbUserId, { path: '/' });
+            $.cookie('@devblog.Constants.COOKIE_FB_EXPIRY', fbExpiresIn, { path: '/' });
+        }
+        window.location.href = '@routes.Frontend.loginFacebook()';
+    }
+    
+    function fbLogin() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+                fbLoggedIn();
+            } else {
+                window.location.href = '@routes.Frontend.login()';
+            }
+        }, {scope: '@devblog.Application.fbAppScope()'});
+    }
+    </script>
+  </body>
+</html>

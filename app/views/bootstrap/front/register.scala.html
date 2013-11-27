@@ -1,0 +1,58 @@
+@(form: play.data.Form[forms.FormRegister]=null)
+@_layout(breakingNewsEnabled=false,
+        sidebar1 = null,
+        sidebar2 = null,
+        sidebar3 = bootstrap.front.blocks._col_sidebar_3_register(),
+        customJs=Array("javascripts/jquery.devblogform.js"),
+        customCss=Array("stylesheets/devblogform.css")){
+    @_macro_displayFormErrors(form, Array("displayName", "email", "password", "confirmedPassword"))
+    
+    <form id="formSignup" method="post" action="@routes.Frontend.register()" role="form">
+        <h1 style="padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #dcdcdc;">@Messages("msg.signup")</h1>
+        
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="text" name="displayName" id="frm_displayName" class="form-control"
+                data-helper="@Messages("msg.user.displayName.info")"
+                placeholder="@Messages("msg.user.displayName")"
+                value="@if(form!=null){@form("displayName").value}"
+                />
+            <span class="devblogform-infomsg help-block">@Messages("msg.user.displayName.info")</span>
+        </div>
+        
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="text" name="email" id="frm_email" class="form-control"
+                data-helper="@Messages("msg.user.email.info")"
+                placeholder="@Messages("msg.user.email")"
+                value="@if(form!=null){@form("email").value}"
+                />
+            <span class="devblogform-infomsg help-block">@Messages("msg.user.email.info")</span>
+        </div>
+        
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="password" name="password" id="frm_password" class="form-control"
+                data-helper="@Messages("msg.user.password.info")"
+                placeholder="@Messages("msg.user.password")"
+                />
+            <span class="devblogform-infomsg help-block">@Messages("msg.user.password.info")</span>
+        </div>
+        
+        <div class="devblogform-row form-group">
+            <input data-devblogform="" type="password" name="confirmedPassword" id="frm_confirmedPassword" class="form-control"
+              data-helper="@Messages("msg.user.confirmedPassword.info")"
+              placeholder="@Messages("msg.user.confirmedPassword")"
+              />
+            <span class="devblogform-infomsg help-block">@Messages("msg.user.confirmedPassword.info")</span>
+        </div>
+   
+        <div class="clear">&nbsp;</div>
+   
+        <input type="submit" value="@Messages("msg.signup")" class="btn btn-primary">
+        <fb:login-button show-faces="false" onlogin="javascript:fbLoggedIn();" scope="@devblog.Application.fbAppScope()">@Messages("msg.signin.facebook")</fb:login-button>
+    </form>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#formSignup").devblogform();
+    });
+    </script>
+}
