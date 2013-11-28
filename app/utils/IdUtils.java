@@ -16,4 +16,16 @@ public class IdUtils {
     public final static String nextId64Ascii() {
         return idGen.generateId64Ascii().toLowerCase();
     }
+
+    public final static long nextIdTiny() {
+        return idGen.generateIdTiny();
+    }
+
+    public final static String nextIdTinyHex() {
+        return idGen.generateIdTinyHex().toLowerCase();
+    }
+
+    public final static String nextIdTinyAscii() {
+        return idGen.generateIdTinyAscii().toLowerCase();
+    }
 }

@@ -3,6 +3,11 @@ msg.home = Trang Chủ
 msg.or = hoặc
 msg.nodata = Không có dữ liệu
 
+msg.action = Hành Động
+msg.actions = Hành Động
+msg.save = Lưu
+msg.cancel = Huỷ Bỏ
+
 msg.search = Tìm kiếm
 msg.prev = Trước
 msg.next = Kế tiếp
@@ -47,7 +52,13 @@ error.invalid.password = Lỗi: Vui lòng nhập vào mật mã hợp lệ!
 error.invalid.onfirmedPassword = Lỗi: Vui lòng nhập vào mật mã hợp lệ!
 
 msg.cp.members = Thành Viên
-msg.cp.userGroups = Danh Sách Nhóm
+msg.cp.usergroups = Danh Sách Nhóm
 msg.cp.users = Danh Sách User
 
-msg.cp.userGroups.create = Tạo Nhóm Mới
+msg.cp.usergroup.create = Tạo Nhóm Mới
+msg.cp.usergroup.create.done = Nhóm "{0}" đã được tạo thành công.
+error.usergroup.title.empty = Lỗi: Vui lòng nhập tên của nhóm!
+msg.usergroup.id = ID
+msg.usergroup.id.info = ID của nhóm (sẽ được hệ thống tự động sinh ra)
+msg.usergroup.title = Tên Nhóm
+msg.usergroup.title.info = Đặt tên cho nhóm

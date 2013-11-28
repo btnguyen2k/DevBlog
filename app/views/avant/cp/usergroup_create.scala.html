@@ -1,0 +1,47 @@
+@(form: play.data.Form[forms.FormCpCreateUsergroup])
+@_layout(active="usergroups",
+        customJs=Array(),
+        customCss=Array()){
+    <div id="page-heading">
+        <ol class="breadcrumb">
+            <li><a href="@routes.Cp.index()"><i class="fa fa-home"></i> @Messages("msg.dashboard")</a></li>
+            <li><a href="@routes.Cp_User.usergroups()">@Messages("msg.cp.usergroups")</a></li>
+            <li>@Messages("msg.cp.usergroup.create")</li>
+        </ol>        
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>@Messages("msg.cp.usergroup.create")</h4>
+                    </div>                    
+                    <div class="panel-body">
+                        @_macro_displayFormErrors(form, Array("title"))
+                        <form role="form" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control tooltips" id="frm_id" name="id"
+                                    data-trigger="hover" data-original-title="@Messages("msg.usergroup.id.info")"
+                                    placeholder="@Messages("msg.usergroup.id")"
+                                    value="@if(form!=null){@form("id").value}"
+                                    readonly="readonly"
+                                    />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control tooltips" id="frm_title" name="title"
+                                    data-trigger="focus" data-original-title="@Messages("msg.usergroup.title.info")"
+                                    placeholder="@Messages("msg.usergroup.title")"
+                                    value="@if(form!=null){@form("title").value}"                                    
+                                    />
+                            </div>
+                            <div class="clear"></div>
+                            <button style="width: 120px" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> @Messages("msg.save")</button>
+                            <button style="width: 120px" type="button" onclick="javascript:_go('@routes.Cp_User.usergroups()')" class="btn btn-default"><i class="fa fa-reply"></i> @Messages("msg.cancel")</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

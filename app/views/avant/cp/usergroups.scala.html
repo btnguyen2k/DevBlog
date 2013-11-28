@@ -1,20 +1,23 @@
-@(userGroups: Array[bo.user.UsergroupBo])
-@_layout(active="user_groups",
+@(usergroups: Array[bo.user.UsergroupBo])
+@_layout(active="usergroups",
         customJs=Array("avant/assets/plugins/datatables/jquery.dataTables.js",
             "avant/assets/plugins/datatables/dataTables.bootstrap.js"),
         customCss=Array("avant/assets/plugins/datatables/dataTables.css")){
     <div id="page-heading">
         <ol class="breadcrumb">
-            <li><a href="@routes.Cp.index()">@Messages("msg.dashboard")</a></li>
-            <li>@Messages("msg.cp.userGroups")</li>
+            <li><a href="@routes.Cp.index()"><i class="fa fa-home"></i> <a href="@routes.Cp.index()">@Messages("msg.dashboard")</a></li>
+            <li>@Messages("msg.cp.usergroups")</li>
         </ol>
         
+        <div class="alert alert-info">
+        </div>
+        
         <div class="options">
-            <a href="javascript:;" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.userGroups.create")</a>
+            <a href="@routes.Cp_User.createUsergroup()" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.usergroup.create")</a>
         </div>
         
         <!--
-        <h1>@Messages("msg.cp.userGroups")</h1>
+        <h1>@Messages("msg.cp.usergroups")</h1>
         -->
         <!--
         <div class="options">
@@ -38,7 +41,7 @@
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>@Messages("msg.cp.userGroups")</h4>
+                        <h4>@Messages("msg.cp.usergroups")</h4>
                         <div class="options">                            
                             <!--
                             <a href="javascript:;"><i class="icon-cog"></i></a>
@@ -52,16 +55,16 @@
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="usergroups">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Action(s)</th>
+                                    <th>@Messages("msg.usergroup.id")</th>
+                                    <th>@Messages("msg.usergroup.title")</th>
+                                    <th>@Messages("msg.actions")</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for(userGroup <- userGroups){
-                                    <tr class="odd gradeX">
-	                                    <td>@userGroup.getId()</td>
-	                                    <td>@userGroup.getTitle()</td>
+                                @for(usergroup <- usergroups){
+                                    <tr>
+	                                    <td>@usergroup.getId()</td>
+	                                    <td>@usergroup.getTitle()</td>
 	                                    <td class="center">X</td>
 	                                </tr>
                                 }
@@ -92,7 +95,7 @@
                             $('.dataTables_length select').addClass('form-control');
                         });
                         </script>
-                        <a href="javascript:;" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.userGroups.create")</a>
+                        <a href="@routes.Cp_User.createUsergroup()" class="btn btn-warning"><i class="fa fa-plus"></i> @Messages("msg.cp.usergroup.create")</a>
                     </div>
                 </div>
             </div>

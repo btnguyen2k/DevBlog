@@ -33,4 +33,8 @@ public class Application {
     public static String queryString(String name) {
         return Controller.request().getQueryString(name);
     }
+
+    public static String flashMessage(String name) {
+        return Controller.flash(name);
+    }
 }
